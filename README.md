@@ -9,6 +9,8 @@ SELECT product_id FROM Products where low_fats='Y' and recyclable='Y';
 **584. Find Customer Referee**
 
 SELECT name FROM Customer WHERE referee_id IS NULL OR referee_id<>2;
-**OR**
+
+                         **OR**
+
 SELECT name FROM Customer WHERE referee_id IS NULL OR referee_id!=2;
 
