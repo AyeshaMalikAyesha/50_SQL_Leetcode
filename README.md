@@ -1,4 +1,4 @@
-# Solution of 50 SQL Leetcode Problems
+# Solution of 50 SQL Leetcode Problems MSSQL
 # Link to all 50 Questions: 
 https://leetcode.com/studyplan/top-sql-50/
 
@@ -21,5 +21,9 @@ SELECT name,population,area FROM World WHERE area>=3000000 or population>=250000
 **1148. Article Views I**
 
 SELECT DISTINCT author_id AS id FROM Views WHERE author_id=viewer_id ORDER BY id ASC;
+
+**1683. Invalid Tweets**
+
+SELECT tweet_id FROM Tweets where len(content)>15;
 
 
