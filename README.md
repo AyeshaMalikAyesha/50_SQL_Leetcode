@@ -26,4 +26,8 @@ SELECT DISTINCT author_id AS id FROM Views WHERE author_id=viewer_id ORDER BY id
 
 SELECT tweet_id FROM Tweets where len(content)>15;
 
+**1378. Replace Employee ID With The Unique Identifier**
+
+SELECT unique_id,name FROM Employees emp LEFT JOIN EmployeeUNI uni ON emp.id=uni.id;
+
 
