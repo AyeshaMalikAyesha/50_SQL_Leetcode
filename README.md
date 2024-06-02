@@ -30,4 +30,8 @@ SELECT tweet_id FROM Tweets where len(content)>15;
 
 SELECT unique_id,name FROM Employees emp LEFT JOIN EmployeeUNI uni ON emp.id=uni.id;
 
+**1068. Product Sales Analysis I**
+
+SELECT product_name,year,price FROM Product p INNER JOIN Sales s ON p.product_id=s.product_id;
+
 
