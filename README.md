@@ -34,4 +34,7 @@ SELECT unique_id,name FROM Employees emp LEFT JOIN EmployeeUNI uni ON emp.id=uni
 
 SELECT product_name,year,price FROM Product p INNER JOIN Sales s ON p.product_id=s.product_id;
 
+**1581. Customer Who Visited but Did Not Make Any Transactions**
+SELECT customer_id,COUNT(customer_id) as count_no_trans FROM Transactions t RIGHT JOIN Visits v on v.visit_id=t.visit_id WHERE t.transaction_id IS null GROUP BY customer_id;
+
 
