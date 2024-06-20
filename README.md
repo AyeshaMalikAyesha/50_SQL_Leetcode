@@ -38,4 +38,8 @@ SELECT product_name,year,price FROM Product p INNER JOIN Sales s ON p.product_id
 
 SELECT customer_id,COUNT(customer_id) as count_no_trans FROM Transactions t RIGHT JOIN Visits v on v.visit_id=t.visit_id WHERE t.transaction_id IS null GROUP BY customer_id;
 
+**197. Rising Temperature**
+
+SELECT w2.id as Id FROM Weather w1 INNER JOIN Weather w2 ON DATEDIFF(day,w1.recordDate,w2.recordDate)=1 AND w2.temperature>w1.temperature;
+
 
