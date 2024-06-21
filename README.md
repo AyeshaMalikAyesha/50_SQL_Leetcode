@@ -66,4 +66,16 @@ SELECT s.user_id,ROUND(AVG(CASE WHEN action='confirmed' THEN 1.0 ELSE 0.0 END),2
 
 SELECT s.user_id,ROUND(CAST(COUNT(CASE WHEN action='confirmed' THEN 1 ELSE NULL END) AS FLOAT)/COUNT(*),2) AS confirmation_rate FROM Signups s LEFT JOIN Confirmations c ON s.user_id=c.user_id GROUP BY s.user_id;
 
+**620. Not Boring Movies**
+
+SELECT id,movie,description,rating FROM Cinema WHERE id%2<>0 and description != 'boring' order by rating desc;
+
+**OR**
+
+SELECT id,movie,description,rating FROM Cinema where not description='boring' and id%2=1 order by rating desc;
+
+**OR**
+
+SELECT id,movie,description,rating FROM Cinema WHERE description<>'boring' AND id%2=1 ORDER BY rating DESC;
+
 
