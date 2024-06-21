@@ -58,4 +58,12 @@ SELECT std.student_id,std.student_name,sub.subject_name,COUNT(ex.subject_name) A
 
 SELECT e1.name FROM Employee e1 INNER JOIN Employee e2 ON e1.id<>e2.id WHERE e1.id=e2.managerId GROUP BY e1.id,e1.name HAVING COUNT(e2.id)>=5;
 
+**1934. Confirmation Rate**
+
+SELECT s.user_id,ROUND(AVG(CASE WHEN action='confirmed' THEN 1.0 ELSE 0.0 END),2) as confirmation_rate FROM Signups s left join Confirmations c on s.user_id=c.user_id GROUP BY s.user_id;
+
+                            **OR**
+
+SELECT s.user_id,ROUND(CAST(COUNT(CASE WHEN action='confirmed' THEN 1 ELSE NULL END) AS FLOAT)/COUNT(*),2) AS confirmation_rate FROM Signups s LEFT JOIN Confirmations c ON s.user_id=c.user_id GROUP BY s.user_id;
+
 
