@@ -50,4 +50,8 @@ SELECT a1.machine_id,ROUND(AVG(a2.timestamp-a1.timestamp),3) as processing_time 
 
 SELECT name,bonus FROM Employee emp left join Bonus b on emp.empId=b.empId where bonus<1000 or bonus is null;
 
+**1280. Students and Examinations**
+
+SELECT std.student_id,std.student_name,sub.subject_name,COUNT(ex.subject_name) AS attended_exams FROM Students std CROSS JOIN Subjects sub LEFT JOIN Examinations ex ON std.student_id=ex.student_id AND sub.subject_name=ex.subject_name GROUP BY std.student_id,std.student_name,sub.subject_name ORDER BY std.student_id,sub.subject_name;
+
 
