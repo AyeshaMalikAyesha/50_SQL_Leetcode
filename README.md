@@ -54,4 +54,8 @@ SELECT name,bonus FROM Employee emp left join Bonus b on emp.empId=b.empId where
 
 SELECT std.student_id,std.student_name,sub.subject_name,COUNT(ex.subject_name) AS attended_exams FROM Students std CROSS JOIN Subjects sub LEFT JOIN Examinations ex ON std.student_id=ex.student_id AND sub.subject_name=ex.subject_name GROUP BY std.student_id,std.student_name,sub.subject_name ORDER BY std.student_id,sub.subject_name;
 
+**570. Managers with at Least 5 Direct Reports**
+
+SELECT e1.name FROM Employee e1 INNER JOIN Employee e2 ON e1.id<>e2.id WHERE e1.id=e2.managerId GROUP BY e1.id,e1.name HAVING COUNT(e2.id)>=5;
+
 
