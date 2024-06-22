@@ -78,4 +78,8 @@ SELECT id,movie,description,rating FROM Cinema where not description='boring' an
 
 SELECT id,movie,description,rating FROM Cinema WHERE description<>'boring' AND id%2=1 ORDER BY rating DESC;
 
+**1251. Average Selling Price**
+
+SELECT p.product_id,ISNULL(ROUND((SUM(price*units*1.0)/SUM(units)),2),0) AS average_price FROM Prices p LEFT JOIN UnitsSold s ON p.product_id=s.product_id AND purchase_date BETWEEN start_date AND end_date GROUP BY p.product_id;
+
 
