@@ -91,4 +91,8 @@ SELECT p.project_id,ROUND(AVG(experience_years*1.0),2) AS [average_years] FROM P
 
 SELECT contest_id, ROUND((COUNT(r.user_id)*100.0/(SELECT COUNT(*) FROM Users)),2) AS percentage FROM Register r INNER JOIN Users u ON r.user_id=u.user_id GROUP BY contest_id ORDER BY percentage DESC,contest_id;
 
+**1211. Queries Quality and Percentage**
+
+SELECT query_name,ROUND(AVG(rating*1.0/position),2) AS quality, ROUND(AVG(CASE WHEN rating<3 THEN 1.0 ELSE 0.0 END)*100.0,2) AS poor_query_percentage FROM Queries WHERE query_name IS NOT NULL GROUP BY query_name;
+
 
