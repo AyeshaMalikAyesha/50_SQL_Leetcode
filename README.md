@@ -83,3 +83,8 @@ SELECT id,movie,description,rating FROM Cinema WHERE description<>'boring' AND i
 SELECT p.product_id,ISNULL(ROUND((SUM(price*units*1.0)/SUM(units)),2),0) AS average_price FROM Prices p LEFT JOIN UnitsSold s ON p.product_id=s.product_id AND purchase_date BETWEEN start_date AND end_date GROUP BY p.product_id;
 
 
+**1075. Project Employees I**
+
+SELECT p.project_id,ROUND(AVG(experience_years*1.0),2) AS [average_years] FROM Project p INNER JOIN Employee e ON p.employee_id=e.employee_id GROUP BY project_id;
+
+
