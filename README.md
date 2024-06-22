@@ -111,4 +111,12 @@ SELECT class FROM Courses GROUP BY class HAVING COUNT(*)>=5;
 
 SELECT user_id,COUNT(follower_id) AS followers_count FROM Followers GROUP BY user_id ORDER BY user_id;
 
+**619. Biggest Single Number**
+
+SELECT MAX(num) as num FROM MyNumbers WHERE num IN (SELECT num FROM MyNumbers GROUP BY num HAVING COUNT(num)=1);
+
+**OR**
+
+SELECT MAX(A.num) AS num FROM (SELECT num AS num FROM MyNumbers GROUP BY num HAVING COUNT(*)=1) A;
+
 
