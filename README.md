@@ -99,4 +99,8 @@ SELECT query_name,ROUND(AVG(rating*1.0/position),2) AS quality, ROUND(AVG(CASE W
 
 SELECT teacher_id,COUNT(DISTINCT subject_id) AS cnt FROM Teacher GROUP BY teacher_id;
 
+**1141. User Activity for the Past 30 Days I**
+
+SELECT activity_date AS day,COUNT(DISTINCT user_id) AS active_users FROM Activity WHERE activity_date BETWEEN '2019-06-28' AND '2019-07-27' GROUP BY activity_date;
+
 
