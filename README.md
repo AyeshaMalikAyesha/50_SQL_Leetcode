@@ -87,4 +87,8 @@ SELECT p.product_id,ISNULL(ROUND((SUM(price*units*1.0)/SUM(units)),2),0) AS aver
 
 SELECT p.project_id,ROUND(AVG(experience_years*1.0),2) AS [average_years] FROM Project p INNER JOIN Employee e ON p.employee_id=e.employee_id GROUP BY project_id;
 
+**1633. Percentage of Users Attended a Contest**
+
+SELECT contest_id, ROUND((COUNT(r.user_id)*100.0/(SELECT COUNT(*) FROM Users)),2) AS percentage FROM Register r INNER JOIN Users u ON r.user_id=u.user_id GROUP BY contest_id ORDER BY percentage DESC,contest_id;
+
 
