@@ -140,4 +140,20 @@ SELECT e1.employee_id,e1.name,COUNT(e2.reports_to) AS reports_count,ROUND(AVG(e2
 
 SELECT user_id,CONCAT(UPPER(SUBSTRING(name,1,1)),LOWER(SUBSTRING(name,2,LEN(name)))) AS name FROM Users ORDER BY user_id;
 
+**1527. Patients With a Condition**
+
+SELECT patient_id,patient_name,conditions FROM Patients WHERE conditions LIKE 'DIAB1%' OR conditions LIKE '% DIAB1%';
+
+**196. Delete Duplicate Emails**
+
+DELETE p2 FROM Person p1,Person p2 WHERE p1.email=p2.email AND p2.id>p1.id;
+
+**176. Second Highest Salary**
+
+SELECT CASE WHEN EXISTS (SELECT DISTINCT salary FROM Employee ORDER BY salary DESC OFFSET 1 rows FETCH NEXT 1 ROWS ONLY) THEN (SELECT Distinct salary FROM Employee ORDER BY salary DESC OFFSET 1 ROWS FETCH NEXT 1 ROWS ONLY) ELSE NULL END AS SecondHighestSalary;
+
+**OR**
+
+SELECT MAX(salary) AS SecondHighestSalary FROM Employee WHERE salary <(SELECT MAX(salary) FROM EMPLOYEE);
+
 
