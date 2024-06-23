@@ -95,6 +95,17 @@ SELECT contest_id, ROUND((COUNT(r.user_id)*100.0/(SELECT COUNT(*) FROM Users)),2
 
 SELECT query_name,ROUND(AVG(rating*1.0/position),2) AS quality, ROUND(AVG(CASE WHEN rating<3 THEN 1.0 ELSE 0.0 END)*100.0,2) AS poor_query_percentage FROM Queries WHERE query_name IS NOT NULL GROUP BY query_name;
 
+**1193. Monthly Transactions I**
+
+SELECT FORMAT(trans_date,'yyyy-MM') AS month,
+country,
+COUNT(id) AS trans_count,
+SUM(CASE WHEN state='approved' THEN 1 ELSE 0 END) AS approved_count,
+SUM(amount) AS trans_total_amount,
+SUM(CASE WHEN state='approved' THEN amount ELSE 0 END) AS approved_total_amount
+FROM Transactions
+GROUP BY country,FORMAT(trans_date,'yyyy-MM');
+
 **2356. Number of Unique Subjects Taught by Each Teacher**
 
 SELECT teacher_id,COUNT(DISTINCT subject_id) AS cnt FROM Teacher GROUP BY teacher_id;
