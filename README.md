@@ -156,4 +156,23 @@ SELECT CASE WHEN EXISTS (SELECT DISTINCT salary FROM Employee ORDER BY salary DE
 
 SELECT MAX(salary) AS SecondHighestSalary FROM Employee WHERE salary <(SELECT MAX(salary) FROM EMPLOYEE);
 
+**1484. Group Sold Products By The Date**
+
+WITH t AS (SELECT DISTINCT sell_date,product FROM Activities)
+SELECT t.sell_date,COUNT(t.product) AS num_sold,STRING_AGG(t.product,',') WITHIN GROUP (ORDER BY t.product) AS products FROM t GROUP BY t.sell_date ORDER BY sell_date;
+
+**1327. List the Products Ordered in a Period**
+
+SELECT p.product_name, SUM(unit) AS unit FROM Products p INNER JOIN Orders o ON p.product_id=o.product_id WHERE MONTH(order_date)=2 AND YEAR(order_date)=2020 GROUP BY p.product_name HAVING SUM(unit)>=100; 
+
+**OR**
+
+SELECT product_name,SUM(unit) AS unit FROM Products p INNER JOIN Orders o ON p.product_id=o.product_id WHERE FORMAT(order_date,'yyyy-MM')='2020-02' GROUP BY product_name HAVING SUM(unit)>=100;
+
+**1517. Find Users With Valid E-Mails**
+
+SELECT user_id,name,mail FROM Users WHERE mail LIKE '[Aa-Zz]%@leetcode.com' AND mail NOT LIKE '%[^Aa-Zz0-9-_.]%@leetcode.com';
+
+
+
 
