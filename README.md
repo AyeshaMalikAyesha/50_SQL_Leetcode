@@ -4,6 +4,8 @@ https://leetcode.com/studyplan/top-sql-50/
 
 # Solution
 
+# SELECT 
+
 **1757. Recyclable and Low Fat Products**
 
 SELECT product_id FROM Products where low_fats='Y' and recyclable='Y';
@@ -27,6 +29,8 @@ SELECT DISTINCT author_id AS id FROM Views WHERE author_id=viewer_id ORDER BY id
 **1683. Invalid Tweets**
 
 SELECT tweet_id FROM Tweets where len(content)>15;
+
+# Basic Joins
 
 **1378. Replace Employee ID With The Unique Identifier**
 
@@ -68,6 +72,8 @@ SELECT s.user_id,ROUND(AVG(CASE WHEN action='confirmed' THEN 1.0 ELSE 0.0 END),2
 
 SELECT s.user_id,ROUND(CAST(COUNT(CASE WHEN action='confirmed' THEN 1 ELSE NULL END) AS FLOAT)/COUNT(*),2) AS confirmation_rate FROM Signups s LEFT JOIN Confirmations c ON s.user_id=c.user_id GROUP BY s.user_id;
 
+# Basic Aggregate Functions
+
 **620. Not Boring Movies**
 
 SELECT id,movie,description,rating FROM Cinema WHERE id%2<>0 and description != 'boring' order by rating desc;
@@ -108,6 +114,12 @@ SUM(CASE WHEN state='approved' THEN amount ELSE 0 END) AS approved_total_amount
 FROM Transactions
 GROUP BY country,FORMAT(trans_date,'yyyy-MM');
 
+**1174. Immediate Food Delivery II**
+
+SELECT ROUND(SUM(t.immediate_percentage)*100.0/COUNT(t.cnt),2) AS immediate_percentage FROM (SELECT CASE WHEN MIN(order_date)=MIN(customer_pref_delivery_date) THEN 1 ELSE 0 END AS immediate_percentage,COUNT(DISTINCT customer_id) AS cnt FROM Delivery GROUP BY customer_id ) t;
+
+# Sorting and Grouping
+
 **2356. Number of Unique Subjects Taught by Each Teacher**
 
 SELECT teacher_id,COUNT(DISTINCT subject_id) AS cnt FROM Teacher GROUP BY teacher_id;
@@ -115,6 +127,12 @@ SELECT teacher_id,COUNT(DISTINCT subject_id) AS cnt FROM Teacher GROUP BY teache
 **1141. User Activity for the Past 30 Days I**
 
 SELECT activity_date AS day,COUNT(DISTINCT user_id) AS active_users FROM Activity WHERE activity_date BETWEEN '2019-06-28' AND '2019-07-27' GROUP BY activity_date;
+
+**1070. Product Sales Analysis III**
+
+WITH t AS (SELECT product_id,MIN(year) AS year FROM Sales GROUP BY product_id)
+
+SELECT s.product_id,t.year AS first_year,quantity,price FROM Sales s INNER JOIN t ON t.product_id=s.product_id AND t.year=s.year;
 
 **596. Classes More Than 5 Students**
 
