@@ -165,6 +165,19 @@ SELECT customer_id FROM Customer GROUP BY customer_id HAVING COUNT(DISTINCT prod
 
 SELECT e1.employee_id,e1.name,COUNT(e2.reports_to) AS reports_count,ROUND(AVG(e2.age*1.0),0) AS average_age FROM Employees e1 INNER JOIN Employees e2 ON e1.employee_id=e2.reports_to GROUP BY e1.employee_id,e1.name ORDER BY employee_id;
 
+# Sub Queries
+
+**1978. Employees Whose Manager Left the Company**
+
+SELECT employee_id FROM Employees WHERE  salary<30000 AND manager_id NOT IN (SELECT employee_id FROM Employees) ORDER BY employee_id;
+
+**626. Exchange Seats**
+
+SELECT CASE WHEN id%2=1 AND id=(SELECT COUNT(*) FROM Seat) THEN id 
+WHEN id%2=1 THEN id+1
+WHEN id%2=0 THEN id-1 END AS id,student
+FROM Seat ORDER BY id;
+
 # Advanced String Functions /Regex /Clause
 
 **1667. Fix Names in a Table**
