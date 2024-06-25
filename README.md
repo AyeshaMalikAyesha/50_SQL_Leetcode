@@ -118,6 +118,11 @@ GROUP BY country,FORMAT(trans_date,'yyyy-MM');
 
 SELECT ROUND(SUM(t.immediate_percentage)*100.0/COUNT(t.cnt),2) AS immediate_percentage FROM (SELECT CASE WHEN MIN(order_date)=MIN(customer_pref_delivery_date) THEN 1 ELSE 0 END AS immediate_percentage,COUNT(DISTINCT customer_id) AS cnt FROM Delivery GROUP BY customer_id ) t;
 
+**550. Game Play Analysis IV**
+
+WITH t AS (SELECT player_id,MIN(event_date) AS first_login FROM Activity GROUP BY player_id)
+SELECT ROUND(CAST(SUM(CASE WHEN DATEDIFF(DAY,t.first_login,event_date)=1 THEN 1 ELSE 0 END) AS FLOAT)/COUNT(DISTINCT a.player_id),2) AS fraction FROM Activity a INNER JOIN t ON t.player_id=a.player_id;
+
 # Sorting and Grouping
 
 **2356. Number of Unique Subjects Taught by Each Teacher**
@@ -149,6 +154,12 @@ SELECT MAX(num) as num FROM MyNumbers WHERE num IN (SELECT num FROM MyNumbers GR
 **OR**
 
 SELECT MAX(A.num) AS num FROM (SELECT num AS num FROM MyNumbers GROUP BY num HAVING COUNT(*)=1) A;
+
+**1045. Customers Who Bought All Products**
+
+SELECT customer_id FROM Customer GROUP BY customer_id HAVING COUNT(DISTINCT product_key)=(SELECT COUNT(DISTINCT product_key) FROM Product);
+
+# Advanced Select and Joins
 
 **1731. The Number of Employees Which Report to Each Employee**
 
