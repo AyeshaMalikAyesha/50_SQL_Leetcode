@@ -191,6 +191,29 @@ SELECT t1.visited_on,SUM(t2.day_sum) AS amount,ROUND(AVG(t2.day_sum*1.0),2) AS a
 (SELECT visited_on,SUM(amount) AS day_sum FROM Customer GROUP BY visited_on) t2
 WHERE DATEDIFF(DAY,t2.visited_on,t1.visited_on) BETWEEN 0 AND 6 GROUP BY t1.visited_on;
 
+**602. Friend Requests II: Who Has the Most Friends**
+
+SELECT TOP 1 t.id, COUNT(t.id) AS num
+FROM(
+SELECT requester_id AS id FROM RequestAccepted
+UNION ALL
+SELECT accepter_id AS id FROM RequestAccepted) t
+GROUP BY t.id ORDER BY num DESC;
+
+**585. Investments in 2016**
+
+WITH temp AS (
+    SELECT pid FROM Insurance WHERE tiv_2015 IN (SELECT tiv_2015 FROM Insurance GROUP BY tiv_2015 HAVING COUNT(tiv_2015)>1)
+    INTERSECT
+    SELECT pid FROM Insurance WHERE CONCAT(lat,lon) IN (SELECT CONCAT(lat,lon) FROM Insurance GROUP BY CONCAT(lat,lon) HAVING COUNT(CONCAT(lat,lon))=1)
+)
+SELECT ROUND(SUM(tiv_2016),2) AS tiv_2016 FROM Insurance WHERE pid IN (Select *FROM temp);
+
+**185. Department Top Three Salaries**
+
+WITH RankedSalaries AS (SELECT d.name AS Department,e.name AS Employee,salary AS Salary, DENSE_RANK() OVER(PARTITION BY d.name ORDER BY salary DeSC) AS rank FROM Employee e INNER JOIN Department d ON d.id=e.departmentId) 
+SELECT Department,Employee,Salary FROM RankedSalaries WHERE rank<=3 ORDER BY Department ASC,salary DESC;
+
 # Advanced String Functions /Regex /Clause
 
 **1667. Fix Names in a Table**
