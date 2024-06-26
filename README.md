@@ -178,6 +178,19 @@ WHEN id%2=1 THEN id+1
 WHEN id%2=0 THEN id-1 END AS id,student
 FROM Seat ORDER BY id;
 
+**1341. Movie Rating**
+
+SELECT A.results FROM (SELECT TOP 1 name AS results FROM Users u INNER JOIN MovieRating mr ON u.user_id=mr.user_id GROUP BY mr.user_id,name ORDER BY COUNT(rating) DESC,name ASC) A
+UNION ALL
+SELECT B.results FROM (SELECT TOP 1 title AS results FROM Movies m INNER JOIN MovieRating mr ON m.movie_id=mr.movie_id WHERE YEAR(created_at)=2020 AND MONTH(created_at)=02 GROUP BY mr.movie_id,title ORDER BY AVG(rating*1.0) DESC,title ASC) B;
+
+**1321. Restaurant Growth**
+
+SELECT t1.visited_on,SUM(t2.day_sum) AS amount,ROUND(AVG(t2.day_sum*1.0),2) AS average_amount FROM
+(SELECT c2.visited_on AS visited_on FROM Customer c1 INNER JOIN Customer c2 ON DATEDIFF(DAY,c1.visited_on,c2.visited_on)=6 GROUP BY c2.visited_on) t1,
+(SELECT visited_on,SUM(amount) AS day_sum FROM Customer GROUP BY visited_on) t2
+WHERE DATEDIFF(DAY,t2.visited_on,t1.visited_on) BETWEEN 0 AND 6 GROUP BY t1.visited_on;
+
 # Advanced String Functions /Regex /Clause
 
 **1667. Fix Names in a Table**
