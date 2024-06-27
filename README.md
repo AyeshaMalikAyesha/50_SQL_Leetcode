@@ -175,6 +175,10 @@ SELECT employee_id,department_id FROM Employee WHERE employee_id IN (SELECT empl
 
 SELECT *,CASE WHEN x+y>z AND x+z>y AND y+z>x THEN 'Yes' ELSE 'No' END AS triangle FROM Triangle;
 
+**180. Consecutive Numbers**
+
+SELECT  DISTINCT l1.num AS ConsecutiveNums FROM Logs l1, Logs l2, Logs l3 WHERE (l2.id-l1.id)=1 AND (l3.id-l2.id)=1 AND l1.num=l2.num AND l1.num=l3.num;
+
 # Sub Queries
 
 **1978. Employees Whose Manager Left the Company**
