@@ -165,6 +165,16 @@ SELECT customer_id FROM Customer GROUP BY customer_id HAVING COUNT(DISTINCT prod
 
 SELECT e1.employee_id,e1.name,COUNT(e2.reports_to) AS reports_count,ROUND(AVG(e2.age*1.0),0) AS average_age FROM Employees e1 INNER JOIN Employees e2 ON e1.employee_id=e2.reports_to GROUP BY e1.employee_id,e1.name ORDER BY employee_id;
 
+**1789. Primary Department for Each Employee**
+
+SELECT employee_id,department_id FROM Employee WHERE primary_flag='Y' GROUP BY employee_id,department_id
+UNION ALL
+SELECT employee_id,department_id FROM Employee WHERE employee_id IN (SELECT employee_id FROM Employee GROUP BY employee_id HAVING COUNT(employee_id)=1) AND primary_flag='N';
+
+**610. Triangle Judgement**
+
+SELECT *,CASE WHEN x+y>z AND x+z>y AND y+z>x THEN 'Yes' ELSE 'No' END AS triangle FROM Triangle;
+
 # Sub Queries
 
 **1978. Employees Whose Manager Left the Company**
