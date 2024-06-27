@@ -222,7 +222,11 @@ SELECT ROUND(SUM(tiv_2016),2) AS tiv_2016 FROM Insurance WHERE pid IN (Select *F
 **185. Department Top Three Salaries**
 
 WITH RankedSalaries AS (SELECT d.name AS Department,e.name AS Employee,salary AS Salary, DENSE_RANK() OVER(PARTITION BY d.name ORDER BY salary DeSC) AS rank FROM Employee e INNER JOIN Department d ON d.id=e.departmentId) 
-SELECT Department,Employee,Salary FROM RankedSalaries WHERE rank<=3 ORDER BY Department ASC,salary DESC;
+SELECT Department,Employee,Salary FROM RankedSalaries WHERE rank<=3;
+
+**OR**
+
+SELECT Department,Employee,Salary FROM (SELECT d.name AS Department, e.name AS Employee,salary AS Salary,DENSE_RANK() OVER (PARTITION BY departmentId ORDER BY salary DESC) AS rank FROM Employee e INNER JOIN Department d ON e.departmentId=d.id) RankedSalaries WHERE rank<=3;
 
 # Advanced String Functions /Regex /Clause
 
