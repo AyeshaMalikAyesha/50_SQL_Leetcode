@@ -221,12 +221,10 @@ WHERE DATEDIFF(DAY,t2.visited_on,t1.visited_on) BETWEEN 0 AND 6 GROUP BY t1.visi
 
 **602. Friend Requests II: Who Has the Most Friends**
 
-SELECT TOP 1 t.id, COUNT(t.id) AS num
-FROM(
-SELECT requester_id AS id FROM RequestAccepted
+SELECT TOP 1 id,COUNT(*) AS num FROM(SELECT requester_id AS id FROM RequestAccepted
 UNION ALL
-SELECT accepter_id AS id FROM RequestAccepted) t
-GROUP BY t.id ORDER BY num DESC;
+SELECT accepter_id AS id FROM RequestAccepted) TotalFriends
+GROUP BY id ORDER BY COUNT(*) DESC;
 
 **585. Investments in 2016**
 
