@@ -185,6 +185,14 @@ SELECT t.product_id,Max(t.price) AS price FROM(SELECT product_id,new_price AS pr
 UNION ALL
 SELECT product_id,10 AS price FROM Products GROUP BY product_id HAVING MIN(change_date)>'2019-08-16';
 
+**1907. Count Salary Categories**
+
+SELECT 'Low Salary' AS category,COUNT(*) AS accounts_count FROM Accounts WHERE income<20000
+UNION ALL
+SELECT 'Average Salary' AS category,COUNT(*) AS accounts_count FROM Accounts WHERE income BETWEEN 20000 AND 50000
+UNION ALL
+SELECT 'High Salary' AS category,COUNT(*) AS accounts_count FROM Accounts WHERE income>50000;
+
 # Sub Queries
 
 **1978. Employees Whose Manager Left the Company**
