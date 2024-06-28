@@ -179,6 +179,12 @@ SELECT *,CASE WHEN x+y>z AND x+z>y AND y+z>x THEN 'Yes' ELSE 'No' END AS triangl
 
 SELECT  DISTINCT l1.num AS ConsecutiveNums FROM Logs l1, Logs l2, Logs l3 WHERE (l2.id-l1.id)=1 AND (l3.id-l2.id)=1 AND l1.num=l2.num AND l1.num=l3.num;
 
+**1164. Product Price at a Given Date**
+
+SELECT t.product_id,Max(t.price) AS price FROM(SELECT product_id,new_price AS price,ROW_NUMBER() OVER (Partition by product_id ORDER BY change_date DESC) AS rank FROM Products WHERE change_date<='2019-08-16') t WHERE rank=1 GROUP BY product_id
+UNION ALL
+SELECT product_id,10 AS price FROM Products GROUP BY product_id HAVING MIN(change_date)>'2019-08-16';
+
 # Sub Queries
 
 **1978. Employees Whose Manager Left the Company**
