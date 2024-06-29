@@ -185,6 +185,10 @@ SELECT t.product_id,Max(t.price) AS price FROM(SELECT product_id,new_price AS pr
 UNION ALL
 SELECT product_id,10 AS price FROM Products GROUP BY product_id HAVING MIN(change_date)>'2019-08-16';
 
+**1204. Last Person to Fit in the Bus**
+
+SELECT TOP 1 q1.person_name FROM Queue q1 INNER JOIN Queue q2 ON q1.turn>=q2.turn GROUP BY q1.person_name HAVING SUM(q2.weight)<=1000 ORDER BY SUM(q2.weight) DESC;
+
 **1907. Count Salary Categories**
 
 SELECT 'Low Salary' AS category,COUNT(*) AS accounts_count FROM Accounts WHERE income<20000
